@@ -25,6 +25,7 @@ circle {
     z-index: 1;
     fill: #fdffbd;
     filter: drop-shadow( 0px 0px 4px rgba(0, 255, 0, 1.7)) blur(1px);
+    transition: 300ms;
 }
 
 circle:nth-of-type(odd) {
