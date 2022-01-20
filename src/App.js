@@ -1,17 +1,21 @@
 import Hemel from "./components/Hemel";
 import "./App.css";
 import { BigDataProvider } from "./providers/BigDataContext";
-import Person from "./components/Person";
+import { SmallDataProvider } from "./providers/SmallDataContext";
+import Overlay from "./components/Overlay";
 
 function App() {
   return (
-    <BigDataProvider>
-      <div className="App">
-        <main>
-          <Hemel/>
-        </main>
-      </div>
-    </BigDataProvider>
+    <SmallDataProvider>
+      <BigDataProvider>
+        <div className="App">
+          <main>
+            <Hemel />
+            <Overlay />
+          </main>
+        </div>
+      </BigDataProvider>
+    </SmallDataProvider>
   );
 }
 

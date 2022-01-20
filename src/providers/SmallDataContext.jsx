@@ -1,12 +1,12 @@
 import { createContext, useState, useEffect } from "react";
 
-const BigDataContext = createContext(null);
+const SmallDataContext = createContext(null);
 
-export const BigDataProvider = ({ children }) => {
-  const [bigCsv, setBigCsv] = useState(null);
+export const SmallDataProvider = ({ children }) => {
+  const [smallCsv, setSmallCsv] = useState(null);
 
   useEffect(() => {
-    fetch("./groteDataset.csv")
+    fetch("./kleineDataset.csv")
       .then((response) => response.text())
       .then((data, rows, headers) => {
         headers = data.slice(0, data.indexOf("\n")).split(";");
@@ -19,10 +19,10 @@ export const BigDataProvider = ({ children }) => {
           }, {});
           return el;
         });
-        setBigCsv(data);
+        setSmallCsv(data);
       })
   }, []);
-  return <BigDataContext.Provider value={bigCsv}>{children}</BigDataContext.Provider>;
+  return <SmallDataContext.Provider value={smallCsv}>{children}</SmallDataContext.Provider>;
 };
 
-export default BigDataContext;
+export default SmallDataContext;
