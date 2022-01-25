@@ -10,7 +10,7 @@ const Overlay = () => {
   
   return (
     <>
-      <section>
+      <section id= "detail" >
         <Layout />
       </section>
     </>

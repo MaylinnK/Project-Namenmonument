@@ -8,18 +8,27 @@ const Layout = () => {
   }
   // Adds a class to section
   function classToggle(element) {
-    element = document.querySelector("section");
-    element.classList.toggle("open");
+    element = document.getElementById("detail");
+    element.classList.remove("open");
   }
-  
+
   return (
     <>
+      <article className= "header">
         <div>
-          <span onClick={classToggle} id="wrapper">
-            <span className="pijl"></span>
+          <span id="wrapper">
+            <h1 className= "naam"></h1>
+            <span onClick={classToggle} className="streep"></span>
+            <span onClick={classToggle} className="streeptwee"></span>
+          </span>
+          <span>
+            <p>Bekijk overeenkomsten met andere tot-slaaf-gemaakten. Klik op een <img src="/oog-wit.svg" alt="" /></p>
           </span>
         </div>
-        <article></article>
+      </article>
+      <article className= "info">
+
+      </article>
     </>
   );
 };
