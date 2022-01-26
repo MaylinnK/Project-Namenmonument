@@ -410,12 +410,12 @@ strong {
     margin-left: 10px;
 }
 
-#filter::-webkit-scrollbar {
+#filter::-webkit-scrollbar, #detail::-webkit-scrollbar {
     background-color: transparent;
     width: 13px;
 }
 
-#filter::-webkit-scrollbar-thumb {
+#filter::-webkit-scrollbar-thumb, #detail::-webkit-scrollbar-thumb {
     background-color: rgb(63 76 146);
     border-radius: 20px;
 }
