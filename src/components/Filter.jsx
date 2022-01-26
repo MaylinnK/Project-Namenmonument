@@ -21,6 +21,8 @@ const Filter = (data, i) => {
     data.push(smallData[i]);
   }
 
+  data = data.slice(2500)
+
   function updateData(text, results) {
     results = [];
     text = document.querySelector("input[type='text']").value;
@@ -36,23 +38,26 @@ const Filter = (data, i) => {
         if (person.prs_naam.includes(text) == true) {
           results.push(person);
           // console.log("Success big");
-        } 
+        }
       }
       else {
         console.log("solved")
       }
     });
-    console.log(results);
+    loadData(results)
   }
 
-  function html() {
+  function loadData(results, html) {
+    html = []
     data.map((person) => {
-      if (Object.keys(data)[0] == "prs_id") {
-        return <p id={person.prs_id}>{person.prs_naam}</p>;
-      } else if (Object.keys(data)[0] == "ID") {
-        return <p id={person.id}>{person.Naam}</p>;
+      if (Object.keys(person)[0] == "prs_id") {
+        console.log("Het werkt")
+        return (<span><p id={person.prs_id}>{person.prs_naam}</p> <p className= "label">Tot-slaaf-gemaakte</p> <img src="/pijl.svg"/></span>);
+      } else if (Object.keys(person)[0] == "ID") {
+        console.log("Het werkt")
+        return (<span><p id={person.id}>{person.Naam}</p> <p className= "label">Tot-slaaf-gemaakte</p> <img src="/pijl.svg"/></span>);
       }
-    });
+    })
   }
 
   function classToggle(element) {
@@ -84,13 +89,7 @@ const Filter = (data, i) => {
           </span>
         </article>
         <article>
-          {data.map((person) => {
-            if (Object.keys(data[0])[0] == "prs_id") {
-              return <p id={person.prs_id}>{person.prs_naam}</p>;
-            } else if (Object.keys(data[0])[0] == "ID") {
-              return <p id={person.id}>{person.Naam}</p>;
-            }
-          })}
+          {loadData()}
         </article>
       </section>
     </>

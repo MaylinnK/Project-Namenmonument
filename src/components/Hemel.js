@@ -417,6 +417,6 @@ function Hemel(bigDataFiltered, smallDataFiltered, targetData, i) {
     }
   });
 
-  return <svg width="2264" height="1020" ref={ref}></svg>;
+  return <svg width="2264" height="1500" ref={ref}></svg>;
 }
 export default Hemel;
