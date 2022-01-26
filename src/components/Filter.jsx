@@ -1,8 +1,9 @@
+/* eslint-disable eqeqeq */
 import { useContext, Fragment } from "react";
 import BigDataContext from "../providers/BigDataContext";
 import SmallDataContext from "../providers/SmallDataContext";
 
-const Filter = (data, i, html, ans) => {
+const Filter = (data, i) => {
   let bigData = useContext(BigDataContext);
   let smallData = useContext(SmallDataContext);
   if (!smallData) {
@@ -20,11 +21,29 @@ const Filter = (data, i, html, ans) => {
     data.push(smallData[i]);
   }
 
-  // function html() {
-  //   return data.map((person) => (
-  //    Object.keys(data)[0] == "prs_id" ? <p id={person.prs_id}>{person.prs_naam}</p> : <p id={person.id}>{person.naam}</p>
-  //   )
-  // }
+  function updateData(text, results) {
+    results = [];
+    text = document.querySelector("input[type='text']").value;
+    data.map((person) => {
+      // console.log(Object.keys(data[0])[0]);
+      if (Object.keys(person)[1] == "Bron") {
+        if (person.Naam.includes(text) == true) {
+          results.push(person);
+          // console.log("Success small");
+        } 
+      }
+      else if (Object.keys(person)[0] == "prs_id") {
+        if (person.prs_naam.includes(text) == true) {
+          results.push(person);
+          // console.log("Success big");
+        } 
+      }
+      else {
+        console.log("solved")
+      }
+    });
+    console.log(results);
+  }
 
   function html() {
     data.map((person) => {
@@ -36,7 +55,6 @@ const Filter = (data, i, html, ans) => {
     });
   }
 
-  console.log(smallData);
   function classToggle(element) {
     element = document.getElementById("filter");
     element.classList.remove("open");
@@ -46,7 +64,11 @@ const Filter = (data, i, html, ans) => {
       <section id="filter">
         <article>
           <form>
-            <input type="text" placeholder="Bijv. Saroenij" />
+            <input
+              onChange={updateData}
+              type="text"
+              placeholder="Bijv. Saroenij"
+            />
             <label>
               <input type="checkbox" />
               Tot-slaaf-gemaakten
@@ -63,9 +85,9 @@ const Filter = (data, i, html, ans) => {
         </article>
         <article>
           {data.map((person) => {
-            if (Object.keys(data)[0] == "prs_id") {
+            if (Object.keys(data[0])[0] == "prs_id") {
               return <p id={person.prs_id}>{person.prs_naam}</p>;
-            } else if (Object.keys(data)[0] == "ID") {
+            } else if (Object.keys(data[0])[0] == "ID") {
               return <p id={person.id}>{person.Naam}</p>;
             }
           })}
