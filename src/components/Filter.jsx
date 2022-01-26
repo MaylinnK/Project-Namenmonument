@@ -21,7 +21,7 @@ const Filter = (data, i) => {
     data.push(smallData[i]);
   }
 
-  data = data.slice(2500)
+  data = data.slice(2500);
 
   function updateData(text, results) {
     results = [];
@@ -32,32 +32,39 @@ const Filter = (data, i) => {
         if (person.Naam.includes(text) == true) {
           results.push(person);
           // console.log("Success small");
-        } 
-      }
-      else if (Object.keys(person)[0] == "prs_id") {
+        }
+      } else if (Object.keys(person)[0] == "prs_id") {
         if (person.prs_naam.includes(text) == true) {
           results.push(person);
           // console.log("Success big");
         }
-      }
-      else {
-        console.log("solved")
+      } else {
+        console.log("solved");
       }
     });
-    loadData(results)
+    loadData(results);
   }
 
   function loadData(results, html) {
-    html = []
     data.map((person) => {
       if (Object.keys(person)[0] == "prs_id") {
-        console.log("Het werkt")
-        return (<span><p id={person.prs_id}>{person.prs_naam}</p> <p className= "label">Tot-slaaf-gemaakte</p> <img src="/pijl.svg"/></span>);
+        console.log("Het werkt");
+        return (
+          <span>
+            <p id={person.prs_id}>{person.prs_naam}</p>{" "}
+            <p className="label">Tot-slaaf-gemaakte</p> <img src="/pijl.svg" />
+          </span>
+        );
       } else if (Object.keys(person)[0] == "ID") {
-        console.log("Het werkt")
-        return (<span><p id={person.id}>{person.Naam}</p> <p className= "label">Tot-slaaf-gemaakte</p> <img src="/pijl.svg"/></span>);
+        console.log("Het werkt");
+        return (
+          <span>
+            <p id={person.id}>{person.Naam}</p>{" "}
+            <p className="label">Tot-slaaf-gemaakte</p> <img src="/pijl.svg" />
+          </span>
+        );
       }
-    })
+    });
   }
 
   function classToggle(element) {
@@ -88,9 +95,7 @@ const Filter = (data, i) => {
             <span onClick={classToggle} className="streeptwee"></span>
           </span>
         </article>
-        <article>
-          {loadData()}
-        </article>
+        <article>{loadData()}</article>
       </section>
     </>
   );

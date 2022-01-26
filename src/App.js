@@ -10,6 +10,7 @@ function App() {
   function classToggle(element) {
     element = document.getElementById("filter");
     element.classList.add("open");
+    document.getElementById("detail").classList.remove("open")
   }
   return (
     <SmallDataProvider>
