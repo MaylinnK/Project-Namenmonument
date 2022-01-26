@@ -10,7 +10,8 @@ De opdracht was om twee datasets met namen van tot-slaaf-gemaakten te visualiser
 Voor het ontwerp hebben we ervoor gekozen dat de gebruiker op het touchscreen begint bij een
 sterrenhemel, waarin willekeurige sterren worden aanbevolen. Dit nodigt de gebruiker uit om op een naam te
 klikken. Gebruikers kunnen op deze sterren klikken voor meer informatie. Er zit ook een zoekfunctie op, waar gebruikers specifiek kunnen zoeken op naam van de tot-slaaf-gemaakte of op naam van de eigenaar als ze weten wat ze zoeken.  
-Op het grote doek zie je de sterrenhemel waar soms sterren oplichten of met elkaar verbinden als sterrenbeeld wanneer een gebruiker verbanden tussen tot-slaaf-gemaakten opzoekt.
+Op het grote doek zie je de sterrenhemel waar soms sterren oplichten of met elkaar verbinden als sterrenbeeld wanneer een gebruiker verbanden tussen tot-slaaf-gemaakten opzoekt.  
+<img src="https://github.com/MaylinnK/Project-Namenmonument/blob/main/public/readmepic.png?raw=true">
 
 ## Installatie
 1. Clone de repository.
