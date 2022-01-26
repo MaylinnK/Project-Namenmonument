@@ -16,6 +16,9 @@ function App() {
     <SmallDataProvider>
       <BigDataProvider>
         <div className="App">
+          <header>
+            <title>Namenmonument</title>
+          </header>
           <main>
             <span onClick={classToggle} className= "knop"><img src="/search.svg"></img> Gericht zoeken</span>
             <Filter/>

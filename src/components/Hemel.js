@@ -102,6 +102,7 @@ function Hemel(bigDataFiltered, smallDataFiltered, targetData, i) {
 
     const tooltip = d3.select("body").append("div").attr("class", "toolTip");
 
+    // Loads points from big dataset
     let pointsB = points_b.selectAll("circle").data(ranBigData);
     pointsB = pointsB
       .enter()
@@ -137,7 +138,6 @@ function Hemel(bigDataFiltered, smallDataFiltered, targetData, i) {
           .html(function (d) {
             targetData = [];
             targetData.push(bigDataFiltered[j.z]);
-            console.log(targetData);
             let geslacht = "";
             if (
               bigDataFiltered[j.z].prs_geslacht == "Vrouw" ||
@@ -189,6 +189,7 @@ function Hemel(bigDataFiltered, smallDataFiltered, targetData, i) {
           );
       });
 
+    // Loads points from small dataset
     let pointsS = points_s.selectAll("circle").data(ranSmallData);
     pointsS = pointsS
       .enter()
@@ -218,7 +219,6 @@ function Hemel(bigDataFiltered, smallDataFiltered, targetData, i) {
           .html(function (d) {
             targetData = [];
             targetData.push(smallDataFiltered[j.z]);
-            console.log(targetData);
             let geslacht = "";
             if (smallDataFiltered[j.z].Geslacht == "V") {
               geslacht = "vrouw";
@@ -264,6 +264,7 @@ function Hemel(bigDataFiltered, smallDataFiltered, targetData, i) {
           );
       });
 
+    // Adds open class to detail window
     d3.select(".toolTip").on("click", function (element) {
       loadData();
       element = document.getElementById("detail");
@@ -273,6 +274,7 @@ function Hemel(bigDataFiltered, smallDataFiltered, targetData, i) {
       }
     });
 
+    // Cleans up data and then loads it to the detail window
     function loadData() {
       targetData = targetData[0];
       if (Object.keys(targetData)[0] == "ID") {
@@ -294,7 +296,12 @@ function Hemel(bigDataFiltered, smallDataFiltered, targetData, i) {
 
         let opmerking = targetData.Opmerkingen;
         if (targetData.Opmerkingen == "\r") {
-          opmerking = "Geen opmerkingen";
+          opmerking = "Geen extra info";
+        }
+
+        let beroep = targetData.Beroep;
+        if (targetData.Beroep == "Onbekend") {
+          beroep = "Geen extra info";
         }
 
         // d3.select(".header").append("div").attri("class", "naam");
@@ -304,19 +311,29 @@ function Hemel(bigDataFiltered, smallDataFiltered, targetData, i) {
 
         d3.select(".info").html(function () {
           return (
-            "<div class= 'pers'><h3>Personalia</h3><p>Leeftijd: <strong>" +
+            "<div class= 'pers'><h3>Personalia</h3><p class='oog'>Leeftijd: <strong>" +
             targetData.Leeftijd +
-            "</strong><img src='/oog-blauw.svg'></p><p>Afkomst: <strong>" +
+            "</strong><img src='/oog-blauw.svg'></p><p class='oog'>Afkomst: <strong>" +
             targetData.Toponiem +
-            "</strong><img src='/oog-blauw.svg'></p><p>Geboortejaar: <strong>" +
+            "</strong><img src='/oog-blauw.svg'></p><p class='oog'>Geboortejaar: <strong>" +
             targetData["Schatting geboortejaar"] +
-            "</strong><img src='/oog-blauw.svg'></p><p>Kinderen: <strong>" +
+            "</strong><img src='/oog-blauw.svg'></p><p class='oog'>Kinderen: <strong>" +
             targetData.Kinderen +
-            "</strong><img src='/oog-blauw.svg'></p><p>Sterfdatum: <strong>" +
+            "</strong><img src='/oog-blauw.svg'></p><p class='oog'>Sterfdatum: <strong>" +
             targetData.Sterfdatum +
             "</strong><img src='/oog-blauw.svg'></p><span class='klein'>" +
+            beroep +
+            "</span></div><div class= 'plan'><h3>Info</h3><p class='oog'>Inschrijfdatum: <strong>" +
+            targetData["Datum van inschrijving"] +
+            "</strong><img src='/oog-blauw.svg'></p><p>Eigenaar: <strong>" +
+            targetData.Eigenaar +
+            "</strong><span>Bekijk info<img src='/pijl.svg'></span></p><p class='oog'>Plaats: <strong>" +
+            targetData.Plaats +
+            "</strong><img src='/oog-blauw.svg'></p></div><img class='kaart' src='/kaart.svg'><div class= 'plan'><h3>Extra info</h3><p>" +
             opmerking +
-            "</span>"
+            "</p></div><div class= 'plan'><h3>Documentatie</h3><p class= 'oog'>Bron: <strong>" +
+            targetData.Bron +
+            "</strong><img src='/oog-blauw.svg'></p>"
           );
         });
       } else if (Object.keys(targetData)[0] == "prs_id") {
@@ -349,28 +366,29 @@ function Hemel(bigDataFiltered, smallDataFiltered, targetData, i) {
 
         d3.select(".info").html(function () {
           return (
-            "<div class= 'pers'><h3>Personalia</h3><p>Leeftijd: <strong>" +
+            "<div class= 'pers'><h3>Personalia</h3><p class= 'oog'>Leeftijd: <strong>" +
             targetData.prs_leeftijd +
-            "</strong><img src='/oog-blauw.svg'></p><p>Moeders naam: <strong>" +
+            "</strong><img src='/oog-blauw.svg'></p><p class= 'oog'>Moeders naam: <strong>" +
             targetData.prs_moedersnaam +
-            "</strong><img src='/oog-blauw.svg'></p><p>Geboortejaar: <strong>" +
+            "</strong><img src='/oog-blauw.svg'></p><p class= 'oog'>Geboortejaar: <strong>" +
             targetData.prs_geboortedatum +
-            "</strong><img src='/oog-blauw.svg'></p></div><div class='plan'><h3>Info</h3><p>Eigenaar: <strong>" +
+            "</strong><img src='/oog-blauw.svg'></p></div><div class='plan'><h3>Info</h3><p class= 'oog'>Eigenaar: <strong>" +
             targetData.ove_eigenaar +
-            "</strong><img src='/oog-blauw.svg'></p><article><p>Inschrijfdatum: <img src='/oog-blauw.svg'><strong>" +
+            "</strong><img src='/oog-blauw.svg'></p><article><p class= 'oog'>Inschrijfdatum: <img src='/oog-blauw.svg'><strong>" +
             targetData.ove_datum_inschrijving +
             "</strong><span>" +
             targetData.ove_datumtekst_inschrijving +
-            "</span></p><p>Uitschrijfdatum: <img src='/oog-blauw.svg'><strong>" +
+            "</span></p><p class= 'oog'>Uitschrijfdatum: <img src='/oog-blauw.svg'><strong>" +
             targetData.ove_datum_uitschrijving +
             "</strong><span>" +
             targetData.ove_datumtekst_uitschrijving +
-            "</span></p></article></div><div class='doc'><h3>Documentatie</h3><p>Soort documentatie: <strong>Rechtbankpapier</strong><img src='/oog-blauw.svg'><span>Geen extra informatie bekend</span></p></div>"
+            "</span></p></article></div><div class='doc'><h3>Documentatie</h3><p class= 'oog'>Soort documentatie: <strong>Rechtbankpapier</strong><img src='/oog-blauw.svg'><span>Geen extra informatie bekend</span></p></div>"
           );
         });
       }
     }
 
+    // Generates random coordinates for the stars
     function genRandomData(data, n, max, i) {
       var stars = [];
       var datapoint = {};
@@ -384,6 +402,7 @@ function Hemel(bigDataFiltered, smallDataFiltered, targetData, i) {
       return stars;
     }
 
+    // Allows zooming and panning
     function zoomed(event) {
       // create new scale ojects based on event
       var new_xScale = event.transform.rescaleX(xScale);

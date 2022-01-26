@@ -24,34 +24,31 @@ const Filter = (data, i) => {
 
   data = data.slice(250, 750);
 
+  // Pushes search results to array
   function updateData(text, results) {
     results = [];
     text = document.querySelector("input[type='text']").value;
     data.map((person) => {
-      // console.log(Object.keys(data[0])[0]);
       if (Object.keys(person)[1] == "Bron") {
         if (person.Naam.includes(text) == true) {
           results.push(person);
-          // console.log("Success small");
         }
       } else if (Object.keys(person)[0] == "prs_id") {
         if (person.prs_naam.includes(text) == true) {
           results.push(person);
-          // console.log("Success big");
         }
       } else {
-        console.log("solved");
       }
     });
     console.log(results)
   }
 
+// Loads the names in search tabs
   function loadData() {
     return data.map((person) => {
       if (Object.keys(person)[0] == "prs_id") {
-        console.log("Het werkt");
         return (
-          <span id={person.ove_UUID} onClick={detail}>
+          <span key={person.ove_UUID} id={person.ove_UUID} onClick={detail}>
             <p id={person.ove_UUID}>{person.prs_naam}</p>
             <p className="label" id={person.ove_UUID}>
               Tot-slaaf-gemaakte
@@ -60,9 +57,8 @@ const Filter = (data, i) => {
           </span>
         );
       } else if (Object.keys(person)[0] == "ID") {
-        console.log("Het werkt");
         return (
-          <span id={person.ID} onClick={detail}>
+          <span key={person.ID} id={person.ID} onClick={detail}>
             <p id={person.ID}>{person.Naam}</p>
             <p className="label" id={person.ID}>
               Tot-slaaf-gemaakte
@@ -74,10 +70,10 @@ const Filter = (data, i) => {
     });
   }
 
+// Loads detail page after clicking a name in search tab
   function detail(event, targetData) {
     if (event.target.id.includes("-")) {
       targetData = data.filter((person) => person.ove_UUID == event.target.id);
-      console.log(targetData);
       targetData = targetData[0]
       document.getElementById("filter").classList.remove("open");
       document.getElementById("detail").classList.add("open");
@@ -127,7 +123,6 @@ const Filter = (data, i) => {
       });
     } else {
       targetData = data.filter((person) => person.ID == event.target.id);
-      console.log(targetData);
       document.getElementById("filter").classList.remove("open");
       document.getElementById("detail").classList.add("open");
 
@@ -152,7 +147,6 @@ const Filter = (data, i) => {
         opmerking = "Geen opmerkingen";
       }
 
-      // d3.select(".header").append("div").attri("class", "naam");
       d3.select(".naam").html(
         targetData.Naam + "<img src='/" + geslacht + ".svg'>"
       );
