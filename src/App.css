@@ -399,6 +399,7 @@ strong {
     color: white;
     height: 40px;
     align-items: center;
+    cursor: pointer;
 }
 
 
