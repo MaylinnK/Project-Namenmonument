@@ -326,6 +326,7 @@ strong {
 }
 
 .knop {
+    display: none;
     position: absolute;
     color: white;
     background-color: rgba(44, 50, 103, 0.8);
